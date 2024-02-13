@@ -9,7 +9,7 @@ import BackButton from "../../components/BackButton";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import BarraNavegador from "../../components/BarraNavegador";
 
-const ListCaso = () => {
+const CasosAntiguos = () => {
   const [casos, setCasos] = useState([]);
   const [loading, setLoading] = useState(false);
   const { userAbogado } = useAuthContext();
@@ -18,7 +18,7 @@ const ListCaso = () => {
     setLoading(true);
     if (userAbogado) {
       axios
-        .get("http://localhost:3001/caso", {
+        .get("http://localhost:3001/caso/casosAntiguos", {
           headers: {
             Authorization: `Bearer ${userAbogado.token}`,
           },
@@ -37,28 +37,6 @@ const ListCaso = () => {
       console.log("No identificado");
     }
   }, [userAbogado]);
-
-  const handleCasosAntiguos = () => {
-    setLoading(true);
-    if (userAbogado) {
-      axios
-        .get("http://localhost:3001/caso/casosAntiguos", {
-          headers: {
-            Authorization: `Bearer ${userAbogado.token}`,
-          },
-        })
-        .then((response) => {
-          setCasos(response.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log(error);
-          setLoading(false);
-        });
-    } else {
-      console.log("No identificadooo");
-    }
-  };
 
   return (
     <div className="p-4 bg-gray-100">
@@ -93,7 +71,7 @@ const ListCaso = () => {
           </thead>
           <tbody>
             {casos
-              .filter((caso) => caso.casoActivo)
+              .filter((caso) => !caso.casoActivo)
               .map((caso, index) => (
                 <tr key={caso._id} className="h-8">
                   <td className="border border-slate-700 rounded-md text-center">
@@ -142,9 +120,9 @@ const ListCaso = () => {
                   </td>
                 </tr>
               ))}
-            <Link to={"/caso/casosAntiguos"}>
+            <Link to={"/caso"}>
               <button className="bg-blue-500 text-white px-4 py-2 rounded-md ml-2 hover:bg-blue-600">
-                Casos antiguos
+                Volver a mis casos
               </button>
             </Link>
           </tbody>
@@ -154,4 +132,4 @@ const ListCaso = () => {
   );
 };
 
-export default ListCaso;
+export default CasosAntiguos;

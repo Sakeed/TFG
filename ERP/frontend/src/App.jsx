@@ -13,6 +13,7 @@ import CrearReunion from "./pages/Reunion/CrearReunion";
 import BorrarReunion from "./pages/Reunion/BorrarReunion";
 import CreateCaso from "./pages/Caso/createCaso";
 import ListCaso from "./pages/Caso/ListCaso";
+import CasosAntiguos from "./pages/Caso/casosAntiguos";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
 import ShowCaso from "./pages/Caso/showCaso";
@@ -31,6 +32,7 @@ const App = () => {
       </Routes>
       <Routes>
         <Route path="/caso/" element={<ListCaso />} />
+        <Route path="/caso/casosAntiguos" element={<CasosAntiguos />} />
         <Route path="/caso/create" element={<CreateCaso />} />
         <Route path="/caso/details/:id" element={<ShowCaso />} />
       </Routes>

@@ -88,6 +88,25 @@ router.get("/", async (request, response) => {
   }
 });
 
+//Casos antiguos get
+router.get("/casosAntiguos", async (request, response) => {
+  try {
+    const user_id = request.abogadoUser?._id;
+    const caso = await Caso.find({ user_id })
+      .populate("abogado_id")
+      .populate("cliente_id")
+      .populate("reunion");
+
+    return response.status(200).json({
+      count: caso.length,
+      data: caso,
+    });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 //get caso from id
 router.get("/:id", async (request, response) => {
   try {
