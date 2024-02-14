@@ -19,7 +19,7 @@ export const useSignup = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Error al registrarse");
+        throw new Error(errorData.message || "Error al registrarse");
       }
 
       const userData = await response.json();

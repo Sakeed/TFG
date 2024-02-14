@@ -38,28 +38,6 @@ const ListCaso = () => {
     }
   }, [userAbogado]);
 
-  const handleCasosAntiguos = () => {
-    setLoading(true);
-    if (userAbogado) {
-      axios
-        .get("http://localhost:3001/caso/casosAntiguos", {
-          headers: {
-            Authorization: `Bearer ${userAbogado.token}`,
-          },
-        })
-        .then((response) => {
-          setCasos(response.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log(error);
-          setLoading(false);
-        });
-    } else {
-      console.log("No identificadooo");
-    }
-  };
-
   return (
     <div className="p-4 bg-gray-100">
       <BarraNavegador />

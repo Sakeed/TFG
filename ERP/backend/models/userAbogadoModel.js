@@ -25,7 +25,9 @@ userAbogadoSchema.statics.signup = async function (email, password) {
     throw Error("Email no valido");
   }
   if (!validator.isStrongPassword(password)) {
-    throw Error("La contrasena no es fuerte ");
+    throw Error(
+      "La contraseña debe contener números, mayúsculas y minúsculas, además de un carácter especial"
+    );
   }
   const exists = await this.findOne({ email });
 
