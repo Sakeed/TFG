@@ -60,7 +60,7 @@ const CrearReunion = () => {
       })
       .then(() => {
         setLoading(false);
-        navigate("/caso");
+        navigate(`/caso/details/${casoId}`);
       })
       .catch((error) => {
         setLoading(false);

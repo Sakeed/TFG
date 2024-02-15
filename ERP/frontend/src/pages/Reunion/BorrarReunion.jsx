@@ -1,20 +1,29 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const BorrarReunion = () => {
   const [loading, setLoading] = useState(false);
-  const { id } = useParams();
+
   const navigate = useNavigate();
+  const { userAbogado } = useAuthContext();
+  const location = useLocation();
+  const casoId = new URLSearchParams(location.search).get("casoId");
+  const { id } = useParams();
 
   const handleDeleteReunion = () => {
     setLoading(true);
     axios
-      .delete(`http://localhost:3001/reunion/${id}`)
+      .delete(`http://localhost:3001/reunion/${id}`, {
+        headers: {
+          Authorization: `Bearer ${userAbogado.token}`,
+        },
+      })
       .then(() => {
-        navigate("/reunion");
+        navigate(`/caso/details/${casoId}`);
         setLoading(false);
       })
       .catch((error) => {

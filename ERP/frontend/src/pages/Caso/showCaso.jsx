@@ -5,6 +5,7 @@ import Spinner from "../../components/Spinner";
 import { BsArrowLeft } from "react-icons/bs";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineDelete } from "react-icons/md";
 
 const ShowCaso = () => {
   const [caso, setCaso] = useState({});
@@ -13,6 +14,7 @@ const ShowCaso = () => {
   const { userAbogado } = useAuthContext();
   const [facturacion, setFacturacion] = useState("");
   const [comentarios, setComentarios] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [casoActivo, setCasoActivo] = useState(true);
   const navigate = useNavigate();
 
@@ -248,6 +250,13 @@ const ShowCaso = () => {
                   <p className="text-gray-800">
                     Fecha de la Reunión: {reunion.fecha}
                   </p>
+                  <div>
+                    <Link
+                      to={`/reunion/delete/${reunion._id}?casoId=${caso._id}`}
+                    >
+                      <MdOutlineDelete className="text-2xl text-red-600 hover:text-red-800 transition duration-300 ease-in-out transform hover:scale-110" />
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>
