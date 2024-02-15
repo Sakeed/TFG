@@ -62,7 +62,7 @@ router.get("/", async (request, response) => {
   }
 });
 
-//get client from id
+//get reunion from id
 router.get("/:id", async (request, response) => {
   try {
     const { id } = request.params;
@@ -74,7 +74,7 @@ router.get("/:id", async (request, response) => {
   }
 });
 
-//edit client
+//edit reunion
 router.put("/:id", async (request, response) => {
   try {
     if (!request.body.fecha || !request.body.asunto) {

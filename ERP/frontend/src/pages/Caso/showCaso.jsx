@@ -17,6 +17,7 @@ const ShowCaso = () => {
   // eslint-disable-next-line no-unused-vars
   const [casoActivo, setCasoActivo] = useState(true);
   const navigate = useNavigate();
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -62,6 +63,79 @@ const ShowCaso = () => {
         setLoading(false);
         console.log(error);
       });
+  };
+
+  //aÑADIR DOCUMENTOS
+
+  const fileSelectedHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const fileUploadHandler = async () => {
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    try {
+      const response = await axios.post(
+        `http://localhost:3001/caso/${id}/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${userAbogado.token}`,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error al subir el archivo:", error);
+    }
+  };
+
+  //Descargar el documento
+
+  const handleDownloadDocumento = async (documentoId) => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3001/caso/${id}/${documentoId}/download`,
+        {
+          responseType: "blob",
+          headers: {
+            Authorization: `Bearer ${userAbogado.token}`,
+          },
+        }
+      );
+      const contentType = res.headers["content-type"];
+      const blob = new Blob([res.data], { type: contentType });
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `documento_${id}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); // Eliminar el enlace después de la descarga
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //Borrar documento
+  const handleDeleteDocumento = async (documentoId) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/caso/${id}/${documentoId}/delete`,
+        {
+          headers: {
+            Authorization: `Bearer ${userAbogado.token}`,
+          },
+        }
+      );
+
+      console.log(response.data); // Mensaje de éxito de eliminación
+      // Actualizar la interfaz de usuario según sea necesario
+    } catch (error) {
+      console.error("Error al eliminar el documento:", error);
+      // Manejar errores de eliminación
+    }
   };
 
   //Añadir comentarios
@@ -234,6 +308,46 @@ const ShowCaso = () => {
               Actualizar
             </button>
           </div>
+
+          <div className="my-4">
+            <span className="text-lg font-semibold text-gray-700">
+              Documentos:
+            </span>
+            <div className="mt-2">
+              {caso.documentos?.map((documento, index) => (
+                <div
+                  key={index}
+                  className="border border-slate-700 rounded-md p-2 mb-2"
+                >
+                  <p className="text-gray-800">
+                    Nombre del Documento: {documento.nombre}
+                  </p>
+                  <p className="text-gray-800">
+                    Fecha de Subida: {documento.fecha_subida}
+                  </p>
+                  <button
+                    onClick={() => handleDownloadDocumento(documento._id)}
+                    className="bg-blue-500 text-white px-4 py-2 rounded-md ml-2 hover:bg-blue-600"
+                  >
+                    Descargar
+                  </button>
+                  <div>
+                    <button
+                      onClick={() => handleDeleteDocumento(documento._id)}
+                    >
+                      <MdOutlineDelete className="text-2xl text-red-600 hover:text-red-800 transition duration-300 ease-in-out transform hover:scale-110" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <input type="file" onChange={fileSelectedHandler} />
+            <button onClick={fileUploadHandler}>Subir archivo</button>
+          </div>
+
           <div className="my-4">
             <span className="text-lg font-semibold text-gray-700">
               Reuniones:

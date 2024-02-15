@@ -7,6 +7,7 @@ import rutasReunion from "./routes/rutasReunion.js";
 import rutasAbogadoUser from "./routes/rutasAbogadoUser.js";
 import rutasCaso from "./routes/rutasCaso.js";
 import cors from "cors";
+import multer from "multer";
 
 const app = express();
 //Middleware for parsing request body
