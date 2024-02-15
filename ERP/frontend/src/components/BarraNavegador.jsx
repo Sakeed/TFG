@@ -23,17 +23,21 @@ const BarraNavegador = () => {
     { id: 1, text: "Clientes", link: "/client/" },
     { id: 2, text: "Abogados", link: "/abogado/" },
     { id: 3, text: "Reuniones", link: "/reunion/" },
-    { id: 4, text: "Casos", link: "/caso" },
+    { id: 4, text: "Mis casos", link: "/caso" },
     // { id: 5, text: "Signup", link: "/signup" },
   ];
 
   return (
-    <div className="bg-white flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-black">
+    <div className=" flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-black">
       {/* Logo */}
 
-      <h1 className="w-full text-3xl font-bold text-black">
-        <a href={"/"}> Herramienta </a>
-      </h1>
+      <a href={"/"}>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <img src="/logo2.png" alt="texto_alternativo"></img>
+      </a>
 
       {/* Desktop Navigation */}
       <ul className="hidden md:flex">
@@ -70,7 +74,8 @@ const BarraNavegador = () => {
             <ul className="hidden md:flex">
               <li className="p-4 hover:bg-[#00df9a] rounded-xl m-2 cursor-pointer duration-300 hover:text-black">
                 <span> {userAbogado.email}</span>
-                <button onClick={handleClick}>Logout</button>
+                <br></br>
+                <button onClick={handleClick}> Logout</button>
               </li>
             </ul>
           </div>

@@ -13,6 +13,7 @@ const ShowCaso = () => {
   const { userAbogado } = useAuthContext();
   const [facturacion, setFacturacion] = useState("");
   const [comentarios, setComentarios] = useState("");
+  const [casoActivo, setCasoActivo] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,6 +88,56 @@ const ShowCaso = () => {
       })
       .catch((error) => {
         setLoading(false);
+        console.log(error);
+      });
+  };
+
+  //Cerrar el caso
+
+  const handleCerrarCaso = () => {
+    const updatedCasoActivo = false;
+    const data = {
+      casoActivo: updatedCasoActivo,
+    };
+    setCasoActivo(updatedCasoActivo);
+    setLoading(true);
+    axios
+      .put(`http://localhost:3001/caso/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${userAbogado.token}`,
+        },
+      })
+      .then(() => {
+        setLoading(false);
+        navigate("/caso");
+      })
+      .catch((error) => {
+        setLoading(false);
+        // alert('An error happened. Please Chack console');
+        console.log(error);
+      });
+  };
+
+  const handleAbrirCaso = () => {
+    const updatedCasoActivo = true;
+    const data = {
+      casoActivo: updatedCasoActivo,
+    };
+    setCasoActivo(updatedCasoActivo);
+    setLoading(true);
+    axios
+      .put(`http://localhost:3001/caso/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${userAbogado.token}`,
+        },
+      })
+      .then(() => {
+        setLoading(false);
+        navigate("/caso");
+      })
+      .catch((error) => {
+        setLoading(false);
+        // alert('An error happened. Please Chack console');
         console.log(error);
       });
   };
@@ -210,6 +261,25 @@ const ShowCaso = () => {
               Crear nueva reunión
             </Link>
           </div>
+          {caso.casoActivo ? (
+            <div className="flex justify-center">
+              <button
+                onClick={handleCerrarCaso}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md ml-2 hover:bg-blue-600 "
+              >
+                Cerrar el caso
+              </button>
+            </div>
+          ) : (
+            <div className="flex justify-center">
+              <button
+                onClick={handleAbrirCaso}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md ml-2 hover:bg-blue-600 "
+              >
+                Abrir el caso
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

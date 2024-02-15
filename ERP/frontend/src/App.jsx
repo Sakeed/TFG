@@ -17,6 +17,7 @@ import CasosAntiguos from "./pages/Caso/casosAntiguos";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
 import ShowCaso from "./pages/Caso/showCaso";
+import EditCaso from "./pages/Caso/editCaso";
 
 const App = () => {
   const { userAbogado } = useAuthContext();
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/caso/" element={<ListCaso />} />
         <Route path="/caso/casosAntiguos" element={<CasosAntiguos />} />
         <Route path="/caso/create" element={<CreateCaso />} />
+        <Route path="/caso/edit/:id" element={<EditCaso />} />
         <Route path="/caso/details/:id" element={<ShowCaso />} />
       </Routes>
       <Routes>

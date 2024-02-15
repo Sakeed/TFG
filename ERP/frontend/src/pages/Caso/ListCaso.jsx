@@ -39,7 +39,7 @@ const ListCaso = () => {
   }, [userAbogado]);
 
   return (
-    <div className="p-4 bg-gray-100">
+    <div className="p-4 ">
       <BarraNavegador />
       <BackButton />
       <div className="flex justify-between items-center">
@@ -110,7 +110,7 @@ const ListCaso = () => {
                       <Link to={`/caso/details/${caso._id}`}>
                         <BsInfoCircle className="text-2xl text-green-800 transition duration-300 ease-in-out transform hover:scale-110" />
                       </Link>
-                      <Link to={`/reunion/edit/${caso._id}`}>
+                      <Link to={`/caso/edit/${caso._id}`}>
                         <AiOutlineEdit className="text-2xl text-yellow-800 transition duration-300 ease-in-out transform hover:scale-110" />
                       </Link>
                       <Link to={`/reunion/delete/${caso._id}`}>
