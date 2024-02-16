@@ -12,7 +12,7 @@ router.use(requireAuth);
 router.post("/", async (req, res) => {
   try {
     const { fecha, asunto, abogadoId, clienteId, casoId } = req.body;
-
+    const user_id = req.abogadoUser?._id;
     // Verifica si el caso existe
     const caso = await Caso.findById(casoId);
     if (!caso) {
@@ -26,6 +26,7 @@ router.post("/", async (req, res) => {
       abogadoId,
       clienteId,
       casoId, // Asigna el ID del caso a la reunión
+      user_id: user_id,
     });
 
     // Guarda la nueva reunión en la base de datos
@@ -48,7 +49,8 @@ router.post("/", async (req, res) => {
 //Todos las reuniones
 router.get("/", async (request, response) => {
   try {
-    const reunion = await Reunion.find()
+    const user_id = request.abogadoUser?._id;
+    const reunion = await Reunion.find({ user_id })
       .populate("abogadoId")
       .populate("clienteId");
     //response.set("Authorization", `Bearer ${userAbogado.token}`);

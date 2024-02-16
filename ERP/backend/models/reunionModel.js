@@ -22,6 +22,10 @@ var reunionSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Caso",
   },
+  user_id: {
+    type: String,
+    required: true,
+  },
 });
 
 export const Reunion = mongoose.model("Reunion", reunionSchema);
