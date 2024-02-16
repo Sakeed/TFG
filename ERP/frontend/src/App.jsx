@@ -18,6 +18,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
 import ShowCaso from "./pages/Caso/showCaso";
 import EditCaso from "./pages/Caso/editCaso";
+import BorrarCaso from "./pages/Caso/borrarCaso";
 
 const App = () => {
   const { userAbogado } = useAuthContext();
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/caso/create" element={<CreateCaso />} />
         <Route path="/caso/edit/:id" element={<EditCaso />} />
         <Route path="/caso/details/:id" element={<ShowCaso />} />
+        <Route path="/caso/delete/:id" element={<BorrarCaso />} />
       </Routes>
       <Routes>
         <Route

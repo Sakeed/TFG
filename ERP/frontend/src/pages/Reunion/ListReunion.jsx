@@ -8,6 +8,7 @@ import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import BackButton from "../../components/BackButton";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import BarraNavegador from "../../components/BarraNavegador";
+import Calendario from "../../components/Calendario";
 
 const ListReunion = () => {
   const [reuniones, setReuniones] = useState([]);
@@ -40,9 +41,14 @@ const ListReunion = () => {
   return (
     <div className="p-4">
       <BarraNavegador />
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Calendario />
       <BackButton />
       <div className="flex justify-between items-center">
-        <h1 className="text-4x1 my-8">reuniones List</h1>
+        <h1 className="text-4x1 my-8">Lista de reuniones</h1>
         <Link to="/reunion/create">
           <MdOutlineAddBox className="text-sky-800 text-5x2 w-8 h-8" />
         </Link>

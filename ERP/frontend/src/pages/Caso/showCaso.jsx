@@ -6,6 +6,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineDelete } from "react-icons/md";
+import BarraNavegador from "../../components/BarraNavegador";
 
 const ShowCaso = () => {
   const [caso, setCaso] = useState({});
@@ -219,6 +220,7 @@ const ShowCaso = () => {
   };
   return (
     <div className="p-4">
+      <BarraNavegador />
       <div className="flex justify-start items-center mb-4">
         <Link
           to={"/caso"}

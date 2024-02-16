@@ -154,13 +154,11 @@ router.put("/:id", async (request, response) => {
 router.delete("/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    const result = await Reunion.findByIdAndDelete(id);
+    const result = await Caso.findByIdAndDelete(id);
     if (!result) {
-      return response.status(404).json({ message: "reunion not found" });
+      return response.status(404).json({ message: "Caso no encontrado" });
     }
-    return response
-      .status(200)
-      .send({ message: "reunion deleted successfully" });
+    return response.status(200).send({ message: "Caso borrado correctamente" });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });

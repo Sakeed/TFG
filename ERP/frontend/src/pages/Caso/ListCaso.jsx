@@ -113,7 +113,7 @@ const ListCaso = () => {
                       <Link to={`/caso/edit/${caso._id}`}>
                         <AiOutlineEdit className="text-2xl text-yellow-800 transition duration-300 ease-in-out transform hover:scale-110" />
                       </Link>
-                      <Link to={`/reunion/delete/${caso._id}`}>
+                      <Link to={`/caso/delete/${caso._id}`}>
                         <MdOutlineDelete className="text-2xl text-red-600 hover:text-red-800 transition duration-300 ease-in-out transform hover:scale-110" />
                       </Link>
                     </div>

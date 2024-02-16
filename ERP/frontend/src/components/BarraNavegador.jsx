@@ -35,7 +35,7 @@ const BarraNavegador = () => {
         <br></br>
         <br></br>
         <br></br>
-        <br></br>
+
         <img src="/logo2.png" alt="texto_alternativo"></img>
       </a>
 
